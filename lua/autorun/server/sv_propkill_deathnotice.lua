@@ -1,6 +1,13 @@
 
+local hook 			= hook
+local net 			= net
+local util			= util
+local AddCSLuaFile 	= AddCSLuaFile
+
 
 AddCSLuaFile("autorun/client/cl_propkill_deathnotice.lua")
+
+
 
 local Owners = {}
 	
@@ -24,6 +31,11 @@ hook.Add("PlayerSpawnedVehicle"		,"propkill_identifier",RegisterOwner)
 util.AddNetworkString("propkill_identifier")
 
 local function PlayerDeath( victim, inflictor, attacker )
+
+
+	if !inflictor or !victim or !attacker then return end
+
+	if !inflictor:GetClass():find( "prop" ) and inflictor != Entity( 0 ) then return end
 
 	if inflictor == attacker and PlyOwner( inflictor ) then
 		net.Start("propkill_identifier" , true)
