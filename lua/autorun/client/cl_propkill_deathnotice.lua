@@ -12,12 +12,7 @@ net.Receive( "propkill_identifier", function()
 	if !IsValid( victim ) then return end
 
 	if !IsValid( attacker ) then
-		GAMEMODE:AddDeathNotice( "prop_physics" , -1 , "prop_physics" , victim:Name(), victim:Team() )
-		return
-	end
-
-	if attacker == game.GetWorld() then
-		GAMEMODE:AddDeathNotice( "World" , -1 , attacker:GetClass() , victim:Name() , victim:Team() )
+		GAMEMODE:AddDeathNotice( "World" , -1 , game.GetWorld():GetClass() , victim:Name() , victim:Team() )
 		return
 	end
 
